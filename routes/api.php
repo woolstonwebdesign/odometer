@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VehicleController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/testing', function() {
-    return ['message' => 'hello'];
+Route::resource('vehicles', VehicleController::class);
+
+Route::get('/users', function() {
+    // $user = User::create([
+    //     'name' => 'Steven Woolston', 
+    //     'email' => 'design@woolston.com.au',
+    //     'password' => bcrypt('Password')
+    // ]);
+    $users = User::get();
+    return $users;
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
