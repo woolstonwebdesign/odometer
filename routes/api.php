@@ -20,14 +20,20 @@ use App\Models\User;
 Route::resource('vehicles', VehicleController::class);
 Route::resource('odometers', OdometerController::class);
 
-Route::get('/users', function() {
-    // $user = User::create([
-    //     'name' => 'Steven Woolston', 
-    //     'email' => 'design@woolston.com.au',
-    //     'password' => bcrypt('Password')
-    // ]);
-    $users = User::get();
-    return $users;
+Route::get('/user-create', function(Request $request) {
+    $user = User::create([
+        'name' => 'Steven Woolston', 
+        'email' => 'design@woolston.com.au',
+        'password' => bcrypt('Password')
+    ]);
+    // $users = User::get();
+    // return $users;
+});
+
+Route::get('/login', function() {
+    $credentials = request()->only(['email', 'password']);
+    $token = auth()->attempt($credentials);
+    return $token;
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
