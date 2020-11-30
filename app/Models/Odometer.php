@@ -17,4 +17,9 @@ class Odometer extends Model
         'date_of_travel'
     ];
 
+    protected $casts = [
+        'is_kms' => 'boolean',
+        'distance_traveled' => 'double',
+        'odometer' => 'double'
+    ];    
 }

@@ -18,7 +18,7 @@ use App\Models\User;
 */
 
 Route::resource('vehicles', VehicleController::class);
-Route::resource('odometers', OdometerController::class);
+Route::resource('vehicle.odometers', OdometerController::class);
 
 Route::get('/user-create', function(Request $request) {
     $user = User::create([

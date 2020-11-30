@@ -2,27 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Odometer;
+use App\Models\Vehicle;
 
+/**
+ * https://laraveldaily.com/nested-resource-controllers-and-routes-laravel-crud-example/
+ */
 class OdometerController extends Controller
 {
-    /**
-     * Instantiate a new Controller instance.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($vehicleId)
     {
-        $odometers = Odometer::all();
-        return $odometers;
+        $odometers = Odometer::where('vehicle_id', $vehicleId);
+        return $odometers->get();
     }
 
     /**
@@ -41,9 +39,9 @@ class OdometerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($vehicle_id, Request $request)
     {
-        return Odometer::create($request->all());
+        return Odometer::create($request->all() + ['vehicle_id' => $vehicle_id]);
     }
 
     /**
@@ -52,10 +50,9 @@ class OdometerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($vehicle_id, Odometer $odometer)
     {
-        $odometer = Odometer::find($id);
-        return $odometer;
+        return Odometer::find($odometer);
     }
 
     /**
@@ -64,9 +61,9 @@ class OdometerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($vehicle_id, Odometer $odometer)
     {
-        //
+        return response()->json(['message' => 'Not Found!'], 404);
     }
 
     /**
@@ -76,9 +73,8 @@ class OdometerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($vehicle_id, Request $request, Odometer $odometer)
     {
-        $odometer = Odometer::find($id);
         $odometer->update($request->all());
         return $odometer;
     }
