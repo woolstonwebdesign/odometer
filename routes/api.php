@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\OdometerController;
 use App\Models\User;
 
 /*
@@ -17,6 +18,7 @@ use App\Models\User;
 */
 
 Route::resource('vehicles', VehicleController::class);
+Route::resource('odometers', OdometerController::class);
 
 Route::get('/users', function() {
     // $user = User::create([
