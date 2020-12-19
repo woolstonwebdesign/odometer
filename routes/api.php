@@ -4,6 +4,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\OdometerController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerContactController;
+use App\Http\Controllers\CustomerNoteController;
+use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\InvoiceItemController;
+use App\Http\Controllers\PaymentController;
 use App\Models\User;
 
 /*
@@ -19,6 +26,14 @@ use App\Models\User;
 
 Route::resource('vehicles', VehicleController::class);
 Route::resource('vehicle.odometers', OdometerController::class);
+
+Route::resource('customers', CustomerController::class);
+Route::resource('customer.contacts', CustomerContactController::class);
+Route::resource('customer.notes', CustomerNoteController::class);
+Route::resource('customer.invoices', InvoiceController::class);
+Route::resource('invoice.items', InvoiceItemController::class);
+Route::resource('invoice.payments', PaymentController::class);
+Route::resource('invoice.deliveries', DeliveryController::class);
 
 Route::get('/user-create', function(Request $request) {
     $user = User::create([
