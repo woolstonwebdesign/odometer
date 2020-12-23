@@ -17,5 +17,6 @@ class Invoice extends Model
         'invoice_due_date',
         'invoice_scheduled_date',
         'is_canceled',
+        'migrate_id'
     ];
 }

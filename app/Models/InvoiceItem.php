@@ -13,5 +13,6 @@ class InvoiceItem extends Model
         'cost',
         'description',
         'sequence',
+        'migrate_id'
     ];
 }

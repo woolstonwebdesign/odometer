@@ -19,6 +19,7 @@ class CreateInvoiceItemsTable extends Migration
             $table->string('cost');
             $table->string('description');
             $table->integer('sequence')->nullable();
+            $table->integer('migrate_id');
             $table->timestamps();
         });
     }

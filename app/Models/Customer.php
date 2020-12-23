@@ -18,7 +18,8 @@ class Customer extends Model
         'is_support_customer',
         'is_visible',
         'support_end_date',
-        'url'
+        'url',
+        'migrate_id'
     ];
 
     protected $casts = [

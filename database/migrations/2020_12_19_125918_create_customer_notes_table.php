@@ -21,6 +21,7 @@ class CreateCustomerNotesTable extends Migration
             $table->string('notes');
             $table->date('created_date');
             $table->integer('time_taken');
+            $table->integer('migrate_id');
             $table->timestamps();
         });
     }

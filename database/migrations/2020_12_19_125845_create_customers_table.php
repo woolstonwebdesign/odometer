@@ -25,6 +25,7 @@ class CreateCustomersTable extends Migration
             $table->boolean('is_visible');
             $table->date('support_end_date')->nullable();
             $table->string('url')->nullable();
+            $table->integer('migrate_id');
             $table->timestamps();
         });
     }

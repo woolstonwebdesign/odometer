@@ -14,17 +14,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $vehicles = Customer::all();
-        return $vehicles;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+        $customers = Customer::all();
+        return $customers;
     }
 
     /**
@@ -46,19 +37,8 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        $customer = Customer::find($id);
-        return $customer;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Customer $customer)
-    {
-        //
+        $model = Customer::find($customer);
+        return $model;
     }
 
     /**
@@ -70,9 +50,9 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        $customer = Customer::find($id);
-        $customer->update($request->all());
-        return $customer;
+        $model = Customer::find($id);
+        $model->update($request->all());
+        return $model;
 
     }
 
@@ -84,6 +64,6 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        return Customer::destroy($id);
+        return $customer->delete();
     }
 }

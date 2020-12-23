@@ -20,6 +20,7 @@ class CreateCustomerContactsTable extends Migration
             $table->string('first_name');
             $table->string('surname');
             $table->boolean('is_visible');
+            $table->integer('migrate_id');
             $table->timestamps();
         });
     }

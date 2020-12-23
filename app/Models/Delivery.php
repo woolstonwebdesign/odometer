@@ -13,6 +13,7 @@ class Delivery extends Model
         'date_delivered',
         'delivered_to',
         'delivery_comment',
+        'migrate_id'
     ];
 
 }

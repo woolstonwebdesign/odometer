@@ -18,6 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('invoice_id');
             $table->string('amount');
             $table->date('date_paid');
+            $table->integer('migrate_id');
             $table->timestamps();
         });
     }

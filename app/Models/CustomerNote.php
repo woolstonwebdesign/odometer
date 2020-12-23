@@ -15,6 +15,7 @@ class CustomerNote extends Model
         'notes',
         'created_date',
         'time_taken',
+        'migrate_id'
     ];
 
 }

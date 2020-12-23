@@ -23,6 +23,7 @@ class CreateInvoicesTable extends Migration
             $table->date('invoice_due_date');
             $table->date('invoice_scheduled_date')->nullable();
             $table->boolean('is_canceled');
+            $table->integer('migrate_id');
             $table->timestamps();
         });
     }

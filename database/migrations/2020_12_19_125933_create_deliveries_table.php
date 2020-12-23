@@ -19,6 +19,7 @@ class CreateDeliveriesTable extends Migration
             $table->date('date_delivered');
             $table->string('delivered_to');
             $table->string('delivery_comment');
+            $table->integer('migrate_id');
             $table->timestamps();
         });
     }

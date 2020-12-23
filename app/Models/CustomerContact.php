@@ -14,5 +14,6 @@ class CustomerContact extends Model
         'first_name',
         'surname',
         'is_visible',
+        'migrate_id'
     ];
 }

@@ -12,5 +12,6 @@ class Payment extends Model
         'invoice_id',
         'amount',
         'date_paid',
+        'migrate_id'
     ];
 }
