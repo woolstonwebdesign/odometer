@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\CustomerContact;
 use Illuminate\Http\Request;
 
@@ -12,19 +13,15 @@ class CustomerContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Customer $customer)
     {
-        //
-    }
+        $contacts = CustomerContact::whereIn('customer_id', $customer)->with('customer')->get();
+        $result = [
+            "totalrecords" => $contacts->count(),
+            "data" => $contacts
+        ];
+        return $result;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -35,51 +32,42 @@ class CustomerContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return CustomerContact::create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CustomerContact  $customerContact
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\CustomerContact  $contact
      */
-    public function show(CustomerContact $customerContact)
+    public function show(Customer $customer, CustomerContact $contact)
     {
-        //
+        $model = CustomerContact::find($contact);
+        return $model;
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\CustomerContact  $customerContact
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(CustomerContact $customerContact)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CustomerContact  $customerContact
+     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\CustomerContact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CustomerContact $customerContact)
+    public function update(Request $request, Customer $customer, CustomerContact $contact)
     {
-        //
+        $model = CustomerContact::findOrFail($contact->id);
+        $model->update($request->all());
+        return $model;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CustomerContact  $customerContact
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\CustomerContact  $contact
      */
-    public function destroy(CustomerContact $customerContact)
+    public function destroy(Customer $customer, CustomerContact $contact)
     {
-        //
+        return $contact->delete();
     }
 }

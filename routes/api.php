@@ -24,16 +24,16 @@ use App\Models\User;
 |
 */
 
-Route::resource('vehicles', VehicleController::class);
-Route::resource('vehicle.odometers', OdometerController::class);
+Route::resource('odometer/vehicles', VehicleController::class);
+Route::resource('odometer/vehicle.odometers', OdometerController::class);
 
-Route::resource('customers', CustomerController::class);
-Route::resource('customer.contacts', CustomerContactController::class);
-Route::resource('customer.notes', CustomerNoteController::class);
-Route::resource('customer.invoices', InvoiceController::class);
-Route::resource('invoice.items', InvoiceItemController::class);
-Route::resource('invoice.payments', PaymentController::class);
-Route::resource('invoice.deliveries', DeliveryController::class);
+Route::resource('crm/customers', CustomerController::class);
+Route::resource('crm/customer.contacts', CustomerContactController::class);
+Route::resource('crm/customer.notes', CustomerNoteController::class);
+Route::resource('crm/customer.invoices', InvoiceController::class);
+Route::resource('crm/invoice.items', InvoiceItemController::class);
+Route::resource('crm/invoice.payments', PaymentController::class);
+Route::resource('crm/invoice.deliveries', DeliveryController::class);
 
 Route::get('/user-create', function(Request $request) {
     $user = User::create([

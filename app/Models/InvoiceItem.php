@@ -15,4 +15,10 @@ class InvoiceItem extends Model
         'sequence',
         'migrate_id'
     ];
+
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class);
+    }    
+    
 }

@@ -17,20 +17,15 @@ class OdometerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($vehicleId)
+    public function index(Vehicle $vehicle)
     {
-        $odometers = Odometer::where('vehicle_id', $vehicleId);
-        return $odometers->get();
-    }
+        $odometers = Odometer::whereIn('vehicle_id', $vehicle)->with('vehicle')->get();
+        $result = [
+            "totalrecords" => $odometers->count(),
+            "data" => $odometers
+        ];
+        return $result;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -39,9 +34,9 @@ class OdometerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($vehicle_id, Request $request)
+    public function store(Request $request)
     {
-        return Odometer::create($request->all() + ['vehicle_id' => $vehicle_id]);
+        return Odometer::create($request->all());
     }
 
     /**
@@ -50,20 +45,10 @@ class OdometerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($vehicle_id, Odometer $odometer)
+    public function show(Vehicle $vehicle, Odometer $odometer)
     {
-        return Odometer::find($odometer);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($vehicle_id, Odometer $odometer)
-    {
-        return response()->json(['message' => 'Not Found!'], 404);
+        $model = Odometer::find($odometer);
+        return $model;
     }
 
     /**
@@ -73,10 +58,11 @@ class OdometerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($vehicle_id, Request $request, Odometer $odometer)
+    public function update(Request $request, Vehicle $vehicle, Odometer $odometer)
     {
-        $odometer->update($request->all());
-        return $odometer;
+        $model = Odometer::findOrFail($odometer->id);
+        $model->update($request->all());
+        return $model;
     }
 
     /**
@@ -85,8 +71,8 @@ class OdometerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(vehicle $vehicle, Odometer $odometer)
     {
-        return Odometer::destroy($id);
+        return $odometer->delete();
     }
 }

@@ -15,7 +15,11 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::all();
-        return $customers;
+        $result = [
+            "totalrecords" => $customers->count(),
+            "data" => $customers
+        ];
+        return $result;
     }
 
     /**
@@ -50,10 +54,9 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        $model = Customer::find($id);
+        $model = Customer::findOrFail($customer->id);
         $model->update($request->all());
         return $model;
-
     }
 
     /**

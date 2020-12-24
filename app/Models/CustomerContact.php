@@ -16,4 +16,15 @@ class CustomerContact extends Model
         'is_visible',
         'migrate_id'
     ];
+
+    protected $casts = [
+        'is_visible' => 'boolean',
+        'migrate_id' => 'integer',
+        'customer_id' => 'integer'
+    ];    
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }    
 }

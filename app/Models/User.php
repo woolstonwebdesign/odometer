@@ -50,4 +50,10 @@ class User extends Authenticatable implements JWTSubject
         //  add roles in here
         return [];
     }
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
+    }
+
 }

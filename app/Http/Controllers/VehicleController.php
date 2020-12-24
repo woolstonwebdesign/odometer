@@ -15,7 +15,11 @@ class VehicleController extends Controller
     public function index()
     {
         $vehicles = Vehicle::all();
-        return $vehicles;
+        $result = [
+            "totalrecords" => $vehicles->count(),
+            "data" => $vehicles
+        ];
+        return $result;
     }
 
     /**
@@ -35,10 +39,10 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Vehicle $vehicle)
     {
-        $vehicle = Vehicle::find($id);
-        return $vehicle;
+        $model = Vehicle::find($vehicle);
+        return $model;
     }
 
     /**
@@ -48,11 +52,11 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Vehicle $vehicle)
     {
-        $vehicle = Vehicle::find($id);
-        $vehicle->update($request->all());
-        return $vehicle;
+        $model = Vehicle::findOrFail($vehicle->id);
+        $model->update($request->all());
+        return $model;
     }
 
     /**
@@ -61,8 +65,8 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Vehicle $vehicle)
     {
-        return Vehicle::destroy($id);
+        return $vehicle->delete();
     }
 }

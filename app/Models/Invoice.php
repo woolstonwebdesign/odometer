@@ -19,4 +19,21 @@ class Invoice extends Model
         'is_canceled',
         'migrate_id'
     ];
+
+    protected $casts = [
+        'customer_id' => 'integer',
+        'is_canceled' => 'boolean',
+        'migrate_id' => 'integer',
+    ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function items()
+    {
+        return $this->hasMany(InvoiceItem::class);
+    }    
+
 }

@@ -25,5 +25,15 @@ class Customer extends Model
     protected $casts = [
         'is_support_customer' => 'boolean',
         'is_visible' => 'boolean',
-    ];    
+    ];
+
+    public function contacts()
+    {
+        return $this->hasMany(CustomerContact::class);
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }    
 }

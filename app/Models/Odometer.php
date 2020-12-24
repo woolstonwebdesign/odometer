@@ -21,5 +21,11 @@ class Odometer extends Model
         'is_kms' => 'boolean',
         'distance_traveled' => 'double',
         'odometer' => 'double'
-    ];    
+    ];
+
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
+    }    
+
 }

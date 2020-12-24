@@ -12,19 +12,10 @@ class CustomerNoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Customer $customer)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $notes = CustomerNote::whereIn('customer_id', $customer)->with('customer')->get();
+        return $notes;
     }
 
     /**
@@ -35,51 +26,43 @@ class CustomerNoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return CustomerNote::create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CustomerNote  $customerNote
+     * @param  \App\Models\CustomerNote  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function show(CustomerNote $customerNote)
+    public function show(Invoice $note)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\CustomerNote  $customerNote
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(CustomerNote $customerNote)
-    {
-        //
+        $model = CustomerNote::find($note);
+        return $model;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CustomerNote  $customerNote
+     * @param  \App\Models\CustomerNote  $note
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CustomerNote $customerNote)
+    public function update(Request $request, CustomerNote $note)
     {
-        //
+        $model = CustomerNote::find($note);
+        $model->update($request->all());
+        return $model;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CustomerNote  $customerNote
+     * @param  \App\Models\CustomerNote  $note
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CustomerNote $customerNote)
+    public function destroy(CustomerNote $note)
     {
-        //
+        return $note->delete();
     }
 }
